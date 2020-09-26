@@ -1,6 +1,6 @@
 var fs = require('fs');
 const path = require('path');
-const express = require('express')
+const express = require('express');
 module.exports = function(app) {
     fs.readdirSync(__dirname).forEach(function(file) {
         if (file == "index.js") return;

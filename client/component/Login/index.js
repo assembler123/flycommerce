@@ -1,9 +1,16 @@
 import React,{useState} from 'react';
 import logo from '../../../public/assets/logo.png'
+import login_request from './login';
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
-const Login = () => {
+import { Redirect } from 'react-router';
+import {connect} from 'react-redux'
+const Login = (props) => {
     const [id,setId] = useState('');
-    const [pass,setPass] = useState('');
+    const [password,setPass] = useState('');
+    if(props.auth)
+    {
+      return <Redirect to='/manage'></Redirect>
+    }
     return (<Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
       <Header as='h2' color='teal' textAlign='center'>
@@ -12,15 +19,19 @@ const Login = () => {
       <Form size='large'>
         <Segment stacked>
             <h4>Login to the pannel for existing account</h4>
-          <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail or mobile' />
+          <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail or mobile' onChange={e=>{setId(e.target.value)}} value={id} />
           <Form.Input fluid
             icon='lock'
             iconPosition='left'
             placeholder='Password'
             type='password'
+            value={password}
+            onChange={e=>{setPass(e.target.value)}}
           />
 
-          <Button color="Green" fluid size='large'>
+          <Button color="Green" fluid size='large' onClick={()=>{
+            props.login(id,password);
+          }}>
             Login
           </Button>
         </Segment>
@@ -32,4 +43,13 @@ const Login = () => {
   </Grid>)
 
 }
-export default Login;
+const mapStateToProps = (state) => {
+  return state.DataReducer
+}
+const mapDispatchToProps = (dispatch) => {
+  return{  login : (id,password) => {
+    dispatch(login_request({id,password}))
+  }
+}
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Login);
