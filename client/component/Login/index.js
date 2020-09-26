@@ -31,9 +31,14 @@ const Login = (props) => {
 
           <Button color="Green" fluid size='large' onClick={()=>{
             props.login(id,password);
-          }}>
-            Login
+          }}
+          disabled={props.login_req}
+          >
+            {props.login_req?"Loading":"Login"}
           </Button>
+          {props.login_fail?props.err_msg==='401'?
+          <Message color='red'>Wrong credentials</Message>:
+          <Message color='red'>No such user</Message>:null}
         </Segment>
       </Form>
       <Message>

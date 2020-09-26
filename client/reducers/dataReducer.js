@@ -12,17 +12,20 @@ const dataReducer=(state = initState,action)=>{
         case "LOGIN_INIT":
             st.login_req = true;
             st.loggedInUser = null;
+            st.login_fail=false,
             st.auth=false;
             st.err_msg = '';
             return st;
         case "LOGIN_SUCCESS":
             st.loggedInUser = action.payload;
+            st.login_req = false;
             st.auth = true;
             st.login_fail = false;
             st.err_msg = '';
             return st;
         case "LOGIN_FAILED":
             st.login_fail = true;
+            st.login_req = false;
             st.err_msg = action.payload
             return st;
         default:

@@ -40,13 +40,13 @@ module.exports = (app) => {
                     if(await bcrypt.compare(req.body.password,u1.password))
                     res.send(u1);
                     else{
-                        res.status(403)
-                        res.send("Wrong Password")
+                        res.status(401)
+                        res.send({message:"Wrong Password"})
                     }
                 }
                 else{
                     res.status(404);
-                    res.send("No user found");
+                    res.send({message:"No user found"});
                 }
             }
             catch(e){
