@@ -4,14 +4,14 @@ const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
-    entry: path.join(__dirname, 'client', 'index.js'),
+    entry: path.join(__dirname, 'admin', 'index.js'),
     output: {
         path: path.join(__dirname, 'public', 'dist'),
-        filename: 'index.bundle.js'
+        filename: 'index.admin.bundle.js'
     },
     devServer: {
         inline: true,
-        port: 8001,
+        port: 8002,
         historyApiFallback: true,
         contentBase: path.join(__dirname, 'public', 'dist')
 
@@ -36,13 +36,11 @@ module.exports = {
 
             },
             {
-                test: /\.(css|sass|scss)?$/,
-                use: ['style-loader', 'css-loader','sass-loader'] //order is important
+                test: /\.css?$/,
+                use: ['style-loader', 'css-loader'] //order is important
 
-            },{
-                test: /\.(eot|svg|ttf|woff|woff2?)$/,
-                use:['file-loader']
             }
+
         ]
 
     },

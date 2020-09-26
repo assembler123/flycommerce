@@ -1,0 +1,47 @@
+const mongoose = require('mongoose');
+const user = new mongoose.Schema({
+    id:{
+        type:String,
+        unique:true,
+        required:true,
+        min:6,
+        max:255
+    },
+    fName:{
+        type:String,
+        required:true,
+        min:1,
+        max:255
+    },
+    lName:{
+        type:String,
+        required:true,
+        min:1,
+        max:255,
+    },
+    gst:{
+        type:String,
+        required:true,
+        min:1,
+        max:100
+    },
+    state:{
+        type:String,
+        required:true,
+        max:3
+    },
+    pin:{
+        type:String,
+        required:true,
+        max:10
+    },
+    password:{
+        type:String,
+        required:true,
+        max:255
+    },date:{
+        type:Date,
+        default:Date.now()
+    }
+});
+module.exports = mongoose.model('User',user);

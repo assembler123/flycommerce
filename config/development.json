@@ -1,4 +1,5 @@
 
 {
-    "port": 4400
+    "port": 4400,
+    "Mongo_db_conn_url":"mongodb+srv://flycomm:flydevenv@cluster0.rvsps.mongodb.net/<dbname>?retryWrites=true&w=majority"
 }
