@@ -20,7 +20,7 @@ module.exports = (app) => {
                 res.send("Done!!!");
             }
             catch(e){
-                res.sendStatus(500);
+                res.sendStatus(400);
                 console.error(e);
                 // res.send("Something went wrong!");
             }
@@ -53,6 +53,10 @@ module.exports = (app) => {
                 res.sendStatus(500);
 
             }
+        }
+        else
+        {
+            res.send(400)
         }
     })
 

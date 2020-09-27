@@ -1,0 +1,36 @@
+.notF
+{
+    display: grid;
+    grid-template-columns: 65% 35%;;
+}
+.notFCent
+{
+    /* position: relative; */
+    /* transform: translateY(25%); */
+
+}
+.not4
+{
+    font-size: 8em;
+    color:#222;
+    text-align: center;
+
+}
+.not4 span
+{
+    color: #2ecc71;
+}
+.nfst
+{
+    font-size: 2em;
+    text-align: center;
+}
+.bck4
+{
+    font-size: 1.5em;
+    text-align: center;
+}
+.cont4{
+    position: absolute;
+    top:20%
+}
