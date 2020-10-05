@@ -19,7 +19,10 @@ const Login = (props) => {
     <Helmet><title>Login to seller pannel</title></Helmet>
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
-      {user_type === 'new_user'?<Message>Login to access the pannel</Message>:null}
+      {user_type === 'new_user'?<Message color='green'>
+      <Message.Header>Login to access the pannel</Message.Header>
+      <p>You can now access the login pannel</p>
+      </Message>:null}
       <Header as='h2' color='teal' textAlign='center'>
         <Image className="img-logo" src={logo} /> 
       </Header>
