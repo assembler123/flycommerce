@@ -1,9 +1,9 @@
 import React from 'react';
-import {Redirect} from 'react-router-dom';
+import {Redirect,Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 const AuthenticatedRoutes = (props) => {
     const isAuth = props.auth;//No check as of now
-    return isAuth?<props.component/>:<Redirect to='/login'/>
+    return isAuth?<Route {...props} ><props.component/></Route>:<Redirect to='/login'/>
 }
 const mapStateToProps = (state) => {
     return state.DataReducer;

@@ -4,6 +4,7 @@ import Login from '../component/Login';
 import Signup from '../component/Signup'
 import Landing from './Landing.jsx';
 import Manage from '../component/NewAccount';
+import Inventory from '../component/Inventory';
 import NotFound from './NotFound.jsx';
 import AuthenticatedRoutes from './AuthentictedRoutes';
 
@@ -14,6 +15,9 @@ const Routes = () => (
                             <Route path='/login/:user_type' component={Login}/>
                             <Route exact path='/signup' component={Signup}/>
                             <AuthenticatedRoutes path='/manage' component={Manage}></AuthenticatedRoutes>
+                            <AuthenticatedRoutes path='/inventory/:type' component={Inventory}></AuthenticatedRoutes>
+                            <AuthenticatedRoutes exact path='/inventory' component={Inventory}></AuthenticatedRoutes>
+                            
                             <Route path='/' component={NotFound}/>
                         </Switch>
                     );

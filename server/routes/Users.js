@@ -80,6 +80,10 @@ module.exports = (app) => {
     })
     app.post('/api/get/user',authorized,(req,res)=>{
         jwt.verify(req.token,'secretkey', (err,authData)=>{
+            if(err)
+            {
+                res.sendStatus(403)
+            }
             res.send({
                 authData,
                 products:0,
