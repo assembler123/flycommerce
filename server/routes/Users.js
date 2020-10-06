@@ -1,6 +1,20 @@
 const User = require('../models/users');
 const bcrypt =require('bcrypt');
+const jwt = require('jsonwebtoken');
 module.exports = (app) => {
+    const authorized = (req,res,next) =>{
+        const bearer = req.headers['authorization'];
+        if(typeof bearer !== undefined)
+        {
+            const token = bearer.split(' ');
+            req.token = token[1];
+            next();
+        }
+        else
+        {
+            res.sendStatus(403)
+        }
+    }
     app.post('/signup', async (req,res)=>{
         if(req.id!=''&&req.fName!=''&&req.lName!=''&&req.gst!=''&&req.state!=''&&req.pin!='',req.password!='')
         {
@@ -38,7 +52,12 @@ module.exports = (app) => {
                 const u1 = await User.findOne({id:req.body.id});
                 if(u1){
                     if(await bcrypt.compare(req.body.password,u1.password))
-                    res.send(u1);
+                    {
+                        jwt.sign({u1},'secretkey',(err,token)=>{
+                            res.json({token});
+                        })
+                    }
+                    
                     else{
                         res.status(401)
                         res.send({message:"Wrong Password"})
@@ -58,6 +77,18 @@ module.exports = (app) => {
         {
             res.send(400)
         }
+    })
+    app.post('/api/get/user',authorized,(req,res)=>{
+        jwt.verify(req.token,'secretkey', (err,authData)=>{
+            res.send({
+                authData,
+                products:0,
+                profit:0,
+                lastMonthProfit:0,
+                monthsProfit:new Array(12).fill(0),
+                traffic:0
+            })
+        })
     })
 
 }
