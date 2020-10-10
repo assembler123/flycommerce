@@ -60,7 +60,7 @@ module.exports = (app) => {
             {
                 try{
                     const search = req.query.type==='category'?{category:req.query.category}:{sub:req.query.sub};
-                    const products = await Products.find(search);
+                    const products = await Products.aggregate([{$match:search},{$unwind:"$variant"}]);
                     console.log(search)
                     res.send({products,num:products.length})
                 }catch(e){
