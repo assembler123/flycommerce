@@ -1,0 +1,51 @@
+const mongoose = require('mongoose');
+const variantSchema = new mongoose.Schema({
+    pid:{
+        type:String,
+        required:true,
+        max:10
+    },
+    title:{
+        type:String,
+        required:true,
+        max:255
+    },
+    sp:{
+        type:mongoose.Types.Decimal128,
+        required:true,
+    },
+    ap:{
+        type:mongoose.Types.Decimal128
+    },
+    label:{
+        type:String,
+        required:true
+    },
+    stock:{
+        type:Number,
+        required:true
+    },
+    img:{
+        type:Array
+    }
+})
+const product = new mongoose.Schema({
+    id:{
+        type:String,
+        unique:true,
+        required:true,
+        max:10
+    },
+    active:{
+        type:Boolean,
+        required:true
+    },
+    sub:{
+        type:String
+    },
+    category:{
+        type:String,
+    },
+    variant:[variantSchema]
+});
+module.exports = mongoose.model('Product',product);
